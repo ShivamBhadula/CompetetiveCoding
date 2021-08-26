@@ -7,7 +7,7 @@ for i in range(int(input())):
         l1.append(s)
         ans=0
     elif i==1:
-        if s>=l1[0]:
+        if s>l1[0]:
             l1.append(s)
             ans=1
         else:
@@ -22,8 +22,6 @@ for i in range(int(input())):
         if ans==-1:
             l1.append(s)
             ans=len(l1)-1
-    if s=='yvfqub':
-        ans=0
     print(ans) 
 
         
