@@ -1,55 +1,72 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define pi (3.141592653589)
-#define mod 1000000007
-//#define int long long int
-#define float double
-#define pb push_back
-#define mp make_pair
-#define ff first
-#define ss second
-#define all(c) c.begin(), c.end()
-#define min3(a, b, c) min(c, min(a, b))
-#define min4(a, b, c, d) min(d, min(c, min(a, b)))
-#define rfo(i, n) for(int i=n-1;i>=0;i--)
-#define fo(i,n) for(int i=0;i<n;i++)
-#define fast ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-
-
-int32_t main()
+class Test
 {
-   fast
-   int t;
-   cin>>t;
-   while(t--)
+   public:
+   void solve()
    {
-      int n,l,r,ds,nb,base,i,min=INT32_MAX;
-      cin>>n>>l>>r;
-      for(i=r;i>=l;i--)
-      {
-        ds=0;
-        nb=n;
-        if(r>=n && n%i==0)
+     int q,n,l,r,enterInt,sum,min,sum2;
+     cin>>q;
+     for(int i=0;i<q;i++)
+     {
+        cin>>n>>l>>r;
+        if(n>=l && n<=r)
         {
-          base=i;
-          break;
+          cout<<n<<endl;
+          continue;  
         }
-        while(nb>0)
+        if(n<l)
         {
-          ds+=nb%i;
-          nb/=i;
+          cout<<l<<endl;
+          continue;
         }
-        if(min>ds)
+        sum2=INT_MAX;
+        min=0;
+     
+        while(l<r && n/r<r)
         {
-          min=ds;
-          base=i;
+          int temp1=n/r,temp2=n%r;
+          if(sum2>temp1+temp2)
+          {
+            sum2=temp1+temp2;
+            min=r;
+          }
+        r=n/(temp1+1);
         }
-        if(min==1)
+        while(l<=r)
         {
-          break;
+          enterInt=n;
+          sum=0;
+          for(;;)
+          {
+            if(enterInt<l)
+            {
+              sum+=enterInt;
+              if(sum<sum2)
+              {
+                min=l;
+                sum2=sum;
+              }
+              break;   
+            }
+            sum+=enterInt%l;
+            enterInt/=l;
+            if(sum>=sum2)
+              break;    
         }
+        l++;
+        }
+      cout<<min<<endl;
       }
-      cout<<base<<endl;
    }
-   return 0;
+};
+
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);cout.tie(0);
+  Test tt;
+  tt.solve();
+  return 0;
 }
